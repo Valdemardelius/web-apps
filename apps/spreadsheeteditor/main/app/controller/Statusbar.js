@@ -662,6 +662,7 @@ define([
                 this.loadTabColor(sheetIndex);
             } else {
                 this.statusbar.sheetListMenu.items[sheetIndex].setChecked(true);
+                this.api.asc_moveWorksheet(sheetIndex);
             }
             var me = this;
             setTimeout(function(){
