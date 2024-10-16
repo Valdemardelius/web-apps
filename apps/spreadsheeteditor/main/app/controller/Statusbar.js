@@ -660,6 +660,8 @@ define([
             if (this.api && this.api.asc_getActiveWorksheetIndex() !== sheetIndex) {
                 this.api.asc_showWorksheet(sheetIndex);
                 this.loadTabColor(sheetIndex);
+            } else {
+                this.statusbar.sheetListMenu.items[sheetIndex].setChecked(true);
             }
             var me = this;
             setTimeout(function(){
