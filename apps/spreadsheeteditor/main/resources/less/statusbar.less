@@ -329,7 +329,11 @@
     }
 
     #status-number-of-sheet , #status-action {
-        margin-left: -20px;
+        position: absolute;
+        height: 25px;
+        bottom: 0;
+        display: flex;
+        justify-content: flex-start;
         .status-label {
             color: @text-normal;
             margin-top: 6px;
@@ -339,6 +343,7 @@
     }
 
     #status-number-of-sheet {
+        .margin-left(-20px);
         width: 135px;
     }
 
