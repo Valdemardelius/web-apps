@@ -662,7 +662,8 @@ define([
                 this.loadTabColor(sheetIndex);
             } else {
                 this.statusbar.sheetListMenu.items[sheetIndex].setChecked(true);
-                this.api.asc_moveWorksheet(sheetIndex);
+                var tab = _.findWhere(this.statusbar.tabbar.tabs, {sheetindex: sheetIndex});
+                tab.changeState();
             }
             var me = this;
             setTimeout(function(){
