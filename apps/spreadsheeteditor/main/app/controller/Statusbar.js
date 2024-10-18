@@ -662,8 +662,7 @@ define([
                 this.loadTabColor(sheetIndex);
             } else {
                 this.statusbar.sheetListMenu.items[sheetIndex].setChecked(true);
-                var tab = _.findWhere(this.statusbar.tabbar.tabs, {sheetindex: sheetIndex});
-                tab.changeState();
+                this.statusbar.tabbar.setTabVisible(sheetIndex);
             }
             var me = this;
             setTimeout(function(){
