@@ -154,6 +154,10 @@
                 width: 35px;
                 padding: 0;
                 text-align: right;
+                .rtl & {
+                    margin-left: 5px;
+                    text-align: left;
+                }
             }
 
             .text {
@@ -164,6 +168,10 @@
         &.left {
             left: 0;
             padding-left: 10px;
+            .rtl & {
+                right: 0;
+                padding-right: 2px
+            }
 
             .item {
                 float: left;
@@ -178,6 +186,11 @@
         &.right {
             right: 0;
             padding-right: 10px;
+
+            .rtl & {
+                left: 0;
+                padding-left: 10px;
+            }
 
             .item {
                 display: inline-block;
@@ -240,6 +253,10 @@
     width: 100px;
     height: 20px;
     background: url(../../../../common/embed/resources/img/logo.svg) no-repeat;
+
+    .rtl & {        
+        margin-right: -20px;
+    } 
 }
 
 // Control buttons
@@ -333,10 +350,16 @@
 
             &:first-child {
                 margin-right: 5px;
+                .rtl & { 
+                    margin-left: 5px;
+                }
             }
 
             &:last-child {
                 margin-left: 5px;
+                .rtl & { 
+                    margin-right: 5px;
+                }
             }
         }
     }
@@ -454,6 +477,9 @@
 
     .right {
         float: right;
+        .rtl &{
+            float: left;
+        }
     }
 
     .caption {
@@ -582,6 +608,12 @@
     height: @icon-height;
     float: left;
     margin: -3px 4px 0 -24px;
+    .rtl &{
+        width: @icon-width;
+        height: @icon-height;
+        float: right;
+        margin: -3px -16px 0 2px;
+    }
 }
 .btn-icon {
     width: 22px;
@@ -626,6 +658,11 @@
 
         &:hover {
             opacity: 0.7;
+        }
+    }
+    .rtl & {
+        .close {
+            float: left;
         }
     }
 }
@@ -692,8 +729,16 @@
 }
 
 .dropdown-menu {
+    .rtl & {
+        right: auto;
+        left: 0;      
+        text-align: right;    
+    }
     > li > a {
         padding: 8px 20px 8px 28px;
+        .rtl & {
+            padding: 8px 26px 8px 4px;
+    }
         &:hover, &:focus {
             background-color: @btnColor;
             outline: 0 none;
@@ -860,6 +905,11 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     border-radius: 5px;
     border: solid 1px #CBCBCB;
+    
+    .rtl & {
+        left: 45px !important;
+        right: auto !important;
+    }
 
     .body {
         width: 100%;
@@ -914,6 +964,11 @@
                 width: 20px;
                 height: 20px;
                 opacity: 0.8;
+
+                .rtl & {
+                    margin-left: 0;
+                    margin-right: 5px;
+                }
 
                 &:hover:not(:disabled) {
                     background-color: #d8dadc;
