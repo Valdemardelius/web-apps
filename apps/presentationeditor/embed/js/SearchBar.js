@@ -61,10 +61,18 @@
 
         var create = function () {
             $searchBar = common.view.SearchBar.create();
-            if (appConfig.toolbarDocked === 'bottom') {
-                $searchBar.css({'right': '45px', 'bottom': '31px'});
+            if (ui_rtl) {
+                if (appConfig.toolbarDocked === 'bottom') {
+                    $searchBar.css({'left': '45px', 'bottom': '31px'});
+                } else {
+                    $searchBar.css({'left': '45px', 'top': '31px'});
+                }                
             } else {
-                $searchBar.css({'right': '45px', 'top': '31px'});
+                if (appConfig.toolbarDocked === 'bottom') {
+                    $searchBar.css({'right': '45px', 'bottom': '31px'});
+                } else {
+                    $searchBar.css({'right': '45px', 'top': '31px'});
+                }
             }
 
             $searchInput = $searchBar.find('#search-bar-text');

@@ -24,6 +24,9 @@
       position: fixed;
       background: #f7f7f7;
       border-right: 1px solid #c0c0cd;
+      .rtl &{
+        flex-direction: row-reverse;
+      }
     }
 
     @media screen and (min--moz-device-pixel-ratio:0) {
@@ -106,6 +109,11 @@
     margin: 0;
     white-space: nowrap;
     margin-left: 68px;
+
+    .rtl &{
+      margin-left: 0;
+      margin-right: 68px;
+    }
 
     li {
       display: inline-block;

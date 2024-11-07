@@ -154,6 +154,9 @@
                 width: 35px;
                 padding: 0;
                 text-align: right;
+                .rtl & {
+                    text-align: left;
+                }
             }
 
             .text {
@@ -164,9 +167,16 @@
         &.left {
             left: 0;
             padding-left: 10px;
+            .rtl & {
+                padding-left: 0;
+                padding-right: 10px
+            }
 
             .item {
                 float: left;
+                .rtl & {
+                    float: right;
+                }
             }
 
             & > div {
@@ -178,6 +188,10 @@
         &.right {
             right: 0;
             padding-right: 10px;
+            .rtl & {
+                padding-right: 0;
+                padding-left: 10px;
+            }
 
             .item {
                 display: inline-block;
@@ -221,15 +235,33 @@
 
     .margin-right-small {
         margin-right: 8px;
+        .rtl & {
+            margin-right: 0;
+            margin-left: 8px;
+        }
     }
     .margin-right-large {
         margin-right: 12px;
+        .rtl & {
+            margin-right: 0;
+            margin-left: 12px;
+        }
     }
     .margin-left-small {
         margin-left: 8px;
+        .rtl & {
+            margin-right: 0;
+            margin-left: 8px;
+        }
+
     }
     .margin-left-large {
         margin-left: 12px;
+        .rtl & {
+            margin-right: 0;
+            margin-left: 12px;
+        }
+
     }
 }
 
@@ -237,9 +269,11 @@
 // -------------------------
 .brand-logo {
     display: block;
-    width: 100px;
+    width: 86px;
     height: 20px;
-    background: url(../../../../common/embed/resources/img/logo.svg) no-repeat;
+
+    background: url(../../../../common/embed/resources/img/logo.svg) no-repeat; 
+   
 }
 
 // Control buttons
@@ -328,15 +362,24 @@
         list-style-type: none;
         margin: 0 auto;
 
+
         li {
             display: inline-block;
 
             &:first-child {
                 margin-right: 5px;
+                .rtl & { 
+                    margin-right: 0;
+                    margin-left: 5px;
+                }
             }
 
             &:last-child {
                 margin-left: 5px;
+                .rtl & { 
+                    margin-left: 0;
+                    margin-right: 5px;
+                }
             }
         }
     }
@@ -454,11 +497,19 @@
 
     .right {
         float: right;
+        .rtl &{
+            float: left;
+        }
     }
+    
 
     .caption {
         margin-top: 2px;
         margin-right: 8px;
+        .rtl & {
+            margin-right: 0;
+            margin-left: 8px;
+        }
     }
 
     input {
@@ -524,9 +575,11 @@
         background-position: -@icon-width*6 -@icon-height;
     }
     &.slide-prev {
+        .rtl &{transform: rotate(180deg);}
         background-position: -@icon-width*7 -@icon-height;
     }
     &.slide-next {
+        .rtl &{transform: rotate(180deg);}
         background-position: -@icon-width*8 -@icon-height;
     }
 
@@ -582,6 +635,10 @@
     height: @icon-height;
     float: left;
     margin: -3px 4px 0 -24px;
+    .rtl &{
+        float: right;
+        margin: -3px -24px 0 4px;
+    }
 }
 .btn-icon {
     width: 22px;
@@ -603,7 +660,6 @@
     .share-buttons {
         height: 40px;
         text-align: center;
-
         span {
             display: inline-block;
             margin: 0 7px;
@@ -626,6 +682,12 @@
 
         &:hover {
             opacity: 0.7;
+        }
+    }
+
+    .rtl & {
+        .close {
+            float: left;
         }
     }
 }
@@ -653,7 +715,6 @@
         border-radius: 0;
     }
 }
-
 #dlg-password {
     .password-body {
         display: flex;
@@ -691,15 +752,25 @@
     }
 }
 
-.dropdown-menu {
+.dropdown-menu {  
+    .rtl & {
+        right: auto;
+        left: 0;      
+        text-align: right;    
+    }
     > li > a {
         padding: 8px 20px 8px 28px;
+        .rtl & {
+                padding: 8px 28px 8px 20px;
+        }
         &:hover, &:focus {
             background-color: @btnColor;
             outline: 0 none;
         }
         font-size: @buttonFontSize;
-    }
+        
+    }   
+    
 
     .divider {
         margin: 4px 0;
@@ -734,6 +805,9 @@
     display: inline-block;
     line-height: 22px;
     padding: 0 0 0 3px;
+    .rtl &{
+        padding: 0 3px 0 0;
+    }
 }
 
 #page-number {
@@ -860,7 +934,6 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     border-radius: 5px;
     border: solid 1px #CBCBCB;
-
     .body {
         width: 100%;
         height: 100%;
@@ -868,7 +941,6 @@
         background-color: #FFFFFF;
         display: flex;
         padding: 16px;
-
         .search-input-group {
             display: flex;
             position: relative;
@@ -883,6 +955,10 @@
                 padding: 1px 25px 1px 3px;
                 color: #444444;
                 font-size: 11px;
+
+                .rtl & {
+                    padding: 1px 3px 1px 25px !important;
+                }
 
                 &::placeholder {
                     color: #CFCFCF;
@@ -900,6 +976,10 @@
                 height: 100%;
                 line-height: 22px;
                 padding: 0 4px;
+                .rtl & {
+                    left: 0;
+                    right: auto;
+                }
                 color: #A5A5A5;
             }
         }
@@ -914,6 +994,11 @@
                 width: 20px;
                 height: 20px;
                 opacity: 0.8;
+
+                .rtl & {
+                    margin-left: 0;
+                    margin-right: 7px;
+                }
 
                 &:hover:not(:disabled) {
                     background-color: #d8dadc;

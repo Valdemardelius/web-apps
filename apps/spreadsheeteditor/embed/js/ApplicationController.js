@@ -240,23 +240,37 @@ SSE.ApplicationController = new(function(){
         var $prevButton = $('#worksheet-list-button-prev');
         var $nextButton = $('#worksheet-list-button-next');
         var $box = $('#worksheets');
-
+        
         var handleScrollButtonsState = function() {
+            //console.log('this',this)
             if ($container[0].scrollWidth > $container[0].clientWidth) {
                 var scrollLeft = $container.scrollLeft();
                 var scrollWidth = $container[0].scrollWidth;
                 var containerWidth = $container.innerWidth();
-
+                if (ui_rtl) {
+                if (scrollLeft >= 0) {
+                    $prevButton.prop('disabled', false);
+                    $nextButton.prop('disabled', true);
+                } 
+                 else if (scrollLeft - containerWidth -1 <= (scrollWidth*(-1))) {
+                    $prevButton.prop('disabled', true);
+                    $nextButton.prop('disabled', false);
+                } else {
+                    $prevButton.prop('disabled', false);
+                    $nextButton.prop('disabled', false);
+                }
+                } else {
                 if (scrollLeft === 0) {
                     $prevButton.prop('disabled', true);
                     $nextButton.prop('disabled', false);
-                } else if (scrollLeft + containerWidth >= scrollWidth) {
+                }   else if (scrollLeft + containerWidth >= scrollWidth) {
                     $prevButton.prop('disabled', false);
                     $nextButton.prop('disabled', true);
                 } else {
                     $prevButton.prop('disabled', false);
                     $nextButton.prop('disabled', false);
                 }
+            }
             } else {
                 $prevButton.prop('disabled', true);
                 $nextButton.prop('disabled', true);
@@ -274,11 +288,17 @@ SSE.ApplicationController = new(function(){
             $($box.children().get().reverse()).each(function () {
                 var $tab = $(this);
                 var left = common.utils.getPosition($tab).left - buttonWidth;
-
+                if (ui_rtl) {
+                    if (left > 0) {
+                        $container.scrollLeft($container.scrollLeft() + left*(-1) - 26);
+                    return false;
+                    }
+                } else {
                 if (left < 0) {
-                    $container.scrollLeft($container.scrollLeft() + left - 26);
+                    $container.scrollLeft($container.scrollLeft() + left - 26);                   
                     return false;
                 }
+            }
             });
         });
 
@@ -287,11 +307,17 @@ SSE.ApplicationController = new(function(){
             $box.children().each(function () {
                 var $tab = $(this);
                 var right = common.utils.getPosition($tab).left + $tab.outerWidth();
-
+                if (ui_rtl) {
+                    if (right < rightBound) {
+                    $container.scrollLeft($container.scrollLeft() + ((right - rightBound)*(-1)) + ($container.width() > 400 ? 20 : 5));
+                    return false;
+                    }
+                } else {
                 if (right > rightBound) {
-                    $container.scrollLeft($container.scrollLeft() + right - rightBound + ($container.width() > 400 ? 20 : 5));
+                    $container.scrollLeft($container.scrollLeft() + right - rightBound + ($container.width() > 400 ? 20 : 5));                    
                     return false;
                 }
+            }
             });
         });
     }
