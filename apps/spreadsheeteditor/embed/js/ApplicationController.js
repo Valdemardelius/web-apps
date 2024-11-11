@@ -290,7 +290,7 @@ SSE.ApplicationController = new(function(){
                 var left = common.utils.getPosition($tab).left - buttonWidth;
                 if (ui_rtl) {
                     if (left > 0) {
-                        $container.scrollLeft($container.scrollLeft() + left*(-1) - 26);
+                        $container.scrollLeft($container.scrollLeft() - (buttonWidth - left) - 26);
                     return false;
                     }
                 } else {
@@ -309,7 +309,7 @@ SSE.ApplicationController = new(function(){
                 var right = common.utils.getPosition($tab).left + $tab.outerWidth();
                 if (ui_rtl) {
                     if (right < rightBound) {
-                    $container.scrollLeft($container.scrollLeft() + ((right - rightBound)*(-1)) + ($container.width() > 400 ? 20 : 5));
+                    $container.scrollLeft($container.scrollLeft() - ((rightBound - right) - buttonWidth ) + ($container.width() > 400 ? 20 : 5));
                     return false;
                     }
                 } else {
