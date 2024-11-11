@@ -509,7 +509,6 @@ define([
         hasClass: function(cls) {
             return this.$bar.hasClass(cls);
         },
-
         setTabVisible: function(index, suppress) {
             if (index <= 0) {
                 this.$bar.scrollLeft(0);
@@ -527,41 +526,74 @@ define([
                 }
                 var rightbound = this.$bar.width(),
                     tab, right, left;
-                if (index == 'forward') {
-                    for (var i = 0; i < this.tabs.length; i++) {
-                        tab = this.tabs[i].$el;
-                        right = Common.Utils.getPosition(tab).left + parseInt(tab.css('width'));
-
-                        if (right > rightbound) {
-                            this.$bar.scrollLeft(this.$bar.scrollLeft() + (right - rightbound) + (this.$bar.width() > 400 ? 20 : 5));
-                            this.checkInvisible(suppress);
-                            break;
+                    if(!Common.UI.isRTL()) {
+                        if (index == 'forward') {
+                            for (var i = 0; i < this.tabs.length; i++) {
+                                tab = this.tabs[i].$el;
+                                right = Common.Utils.getPosition(tab).left + parseInt(tab.css('width'));
+                                    if (right > rightbound) {
+                                    this.$bar.scrollLeft(this.$bar.scrollLeft() + (right - rightbound) + (this.$bar.width() > 400 ? 20 : 5));
+                                    this.checkInvisible(suppress);
+                                    break;
+                                    }
+                        }
+                        } else if (index == 'backward') {
+                            for (i = this.tabs.length; i-- > 0; ) {
+                                tab = this.tabs[i].$el;
+                                left = Common.Utils.getPosition(tab).left;
+                                    if (left < 0) {
+                                        this.$bar.scrollLeft(this.$bar.scrollLeft() + (left) - 26);
+                                        this.checkInvisible(suppress);
+                                        break;
+                                }
+                            }
+                        } else if (typeof index == 'number') {
+                            tab = this.tabs[index].$el;
+                            left = Common.Utils.getPosition(tab).left;
+                            right = left + parseInt(tab.css('width'));
+                                if (left < 0) {
+                                    this.$bar.scrollLeft(this.$bar.scrollLeft() + (left) - 26);
+                                    this.checkInvisible(suppress);
+                                } else if (right > rightbound) {
+                                    this.$bar.scrollLeft(this.$bar.scrollLeft() + (right - rightbound) + 20);
+                                    this.checkInvisible(suppress);
+                                }
+                        }
+                    } else {
+                        if (index == 'forward') {
+                                for (var i = 0; i < this.tabs.length; i++) {
+                                    tab = this.tabs[i].$el;
+                                    right = Common.Utils.getPosition(tab).left + parseInt(tab.css('width'));
+                                    left = Common.Utils.getPosition(tab).left
+                                        if (right < rightbound) {
+                                            this.$bar.scrollLeft(this.$bar.scrollLeft() - ( (rightbound - right) - parseInt(tab.css('width'))) + (this.$bar.width() > 400 ? 20 : 5));
+                                            this.checkInvisible(suppress);
+                                            break;
+                                        }                           
+                                }
+                        } else if (index == 'backward') {
+                            for (i = this.tabs.length; i-- > 0; ) {
+                                tab = this.tabs[i].$el;
+                                left = Common.Utils.getPosition(tab).left;
+                                    if (left > 0) {
+                                        this.$bar.scrollLeft(this.$bar.scrollLeft() + (left - parseInt(tab.css('width'))) - 26);
+                                        this.checkInvisible(suppress);
+                                        break;
+                                    }
+                            }
+                        } else if (typeof index == 'number') {
+                            tab = this.tabs[index].$el;
+                            left = Common.Utils.getPosition(tab).left;
+                            right = left + parseInt(tab.css('width'));
+                                if (left > 0) {
+                                    this.$bar.scrollLeft(this.$bar.scrollLeft() + (left)*(-1) - 26);
+                                    this.checkInvisible(suppress);
+                                } else if (right < rightbound) {
+                                    this.$bar.scrollLeft(this.$bar.scrollLeft() + (right - rightbound)*(-1) + 20);
+                                    this.checkInvisible(suppress);
+                                }
                         }
                     }
-                } else if (index == 'backward') {
-                    for (i = this.tabs.length; i-- > 0; ) {
-                        tab = this.tabs[i].$el;
-                        left = Common.Utils.getPosition(tab).left;
-
-                        if (left < 0) {
-                            this.$bar.scrollLeft(this.$bar.scrollLeft() + left - 26);
-                            this.checkInvisible(suppress);
-                            break;
-                        }
-                    }
-                } else if (typeof index == 'number') {
-                    tab = this.tabs[index].$el;
-                    left = Common.Utils.getPosition(tab).left;
-                    right = left + parseInt(tab.css('width'));
-
-                    if (left < 0) {
-                        this.$bar.scrollLeft(this.$bar.scrollLeft() + left - 26);
-                        this.checkInvisible(suppress);
-                    } else if (right > rightbound) {
-                        this.$bar.scrollLeft(this.$bar.scrollLeft() + (right - rightbound) + 20);
-                        this.checkInvisible(suppress);
-                    }
-                }
             }
         },
 
