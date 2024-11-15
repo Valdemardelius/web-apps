@@ -1849,6 +1849,8 @@
   "PE.Views.DocumentHolder.textDistributeRows": "Distribute rows",
   "PE.Views.DocumentHolder.textDuplicateLayout": "Duplicate Layout",
   "PE.Views.DocumentHolder.textDuplicateSlideMaster": "Duplicate Slide Master",
+  "PE.Views.DocumentHolder.textRenameLayout": "Rename Layout",
+  "PE.Views.DocumentHolder.textLayoutName": "Layout name",
   "PE.Views.DocumentHolder.textEditObject": "Edit object",
   "PE.Views.DocumentHolder.textEditPoints": "Edit points",
   "PE.Views.DocumentHolder.textFlipH": "Flip horizontally",

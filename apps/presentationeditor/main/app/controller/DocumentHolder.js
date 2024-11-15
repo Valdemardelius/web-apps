@@ -420,6 +420,7 @@ define([
             view.mnuDuplicateLayout.on('click', _.bind(me.onDuplicateLayout, me));
             view.mnuDeleteMaster.on('click', _.bind(me.onDeleteMaster, me));
             view.mnuDeleteLayout.on('click', _.bind(me.onDeleteLayout, me));
+            view.mnuRenameLayout.on('click', _.bind(me.onRenameLayout, me));
         },
 
         createPostLoadElements: function() {
@@ -2825,6 +2826,46 @@ define([
 
         onDeleteLayout: function () {
             this.api.asc_DeleteLayout();
-        }
+        },
+
+        onRenameLayout: function() {
+            var me = this; 
+
+            var selectedElements = me.api.getSelectedElements(),
+            layout           = undefined;
+            if (selectedElements && _.isArray(selectedElements)){
+                _.each(selectedElements, function(element) {
+                    if (Asc.c_oAscTypeSelectElement.Slide == element.get_ObjectType()) {
+                        var elValue         = element.get_ObjectValue();
+                        layout              = elValue.get_LayoutName();
+                        return false;
+                    }
+                });
+            }
+            
+            var rec = layout;        
+
+                if(rec){                    
+                (new Common.Views.TextInputDialog({
+                    title: me.documentHolder.textRenameLayout,
+                    label: me.documentHolder.textLayoutName,
+                    value: rec,
+                    inputConfig: {
+                        allowBlank  : false,
+                        blankError  : me.documentHolder.textRenameError,
+                        validation: function(value) {
+                            return value.length<128 ? true : me.documentHolder.textLongName;
+                        }
+                    },
+                        handler: function(result, value) {
+                            if (result == 'ok') {
+                                me.api.asc_SetLayoutName(value);
+                            }
+                        }
+                    
+                    
+                })).show();
+                }
+        },
     });
 });

@@ -489,6 +489,11 @@ define([], function () {
                 value : 'delete-layout'
             });
 
+            me.mnuRenameLayout = new Common.UI.MenuItem({
+                caption : me.textRenameLayout,
+                value : 'rename-layout'
+            });
+
             me.slideMasterMenu = new Common.UI.Menu({
                 //cls: 'shifted-right',
                 restoreHeightAndTop: true,
@@ -500,9 +505,10 @@ define([], function () {
                     me.mnuDeleteMaster.setVisible(isMaster);
                     me.mnuDuplicateLayout.setVisible(!isMaster);
                     me.mnuDeleteLayout.setVisible(!isMaster);
+                    me.mnuRenameLayout.setVisible(!isMaster);
 
                     isMaster && me.mnuDeleteMaster.setDisabled(!me.api.asc_CanDeleteMaster());
-                    !isMaster && me.mnuDeleteLayout.setDisabled(!me.api.asc_CanDeleteLayout());
+                    !isMaster && me.mnuDeleteLayout.setDisabled(!me.api.asc_CanDeleteLayout());                   
                 },
                 items: [
                     me.mnuInsertMaster,
@@ -511,7 +517,8 @@ define([], function () {
                     me.mnuDuplicateLayout,
                     {caption: '--'},
                     me.mnuDeleteMaster,
-                    me.mnuDeleteLayout
+                    me.mnuDeleteLayout,
+                    me.mnuRenameLayout
                 ]
             });
 
