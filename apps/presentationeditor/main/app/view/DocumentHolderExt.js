@@ -499,6 +499,19 @@ define([], function () {
                 restoreHeightAndTop: true,
                 scrollToCheckedItem: false,
                 initMenu: function(value) {
+
+                    var selectedElements = me.api.getSelectedElements(),
+                    layout           = undefined;
+                    if (selectedElements && _.isArray(selectedElements)){
+                        _.each(selectedElements, function(element) {
+                            if (Asc.c_oAscTypeSelectElement.Slide == element.get_ObjectType()) {
+                                var elValue         = element.get_ObjectValue();
+                                layout              = elValue.get_LayoutName();
+                                return false;
+                            }
+                        });
+                    }     
+
                     var isMaster = value.isMaster;
 
                     me.mnuDuplicateMaster.setVisible(isMaster);
@@ -508,7 +521,8 @@ define([], function () {
                     me.mnuRenameLayout.setVisible(!isMaster);
 
                     isMaster && me.mnuDeleteMaster.setDisabled(!me.api.asc_CanDeleteMaster());
-                    !isMaster && me.mnuDeleteLayout.setDisabled(!me.api.asc_CanDeleteLayout());                   
+                    !isMaster && me.mnuDeleteLayout.setDisabled(!me.api.asc_CanDeleteLayout()); 
+                    !isMaster &&  me.mnuRenameLayout.setDisabled(layout == undefined);                  
                 },
                 items: [
                     me.mnuInsertMaster,
