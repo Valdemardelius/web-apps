@@ -1850,6 +1850,8 @@
   "PE.Views.DocumentHolder.textDuplicateLayout": "Duplicate Layout",
   "PE.Views.DocumentHolder.textDuplicateSlideMaster": "Duplicate Slide Master",
   "PE.Views.DocumentHolder.textRenameLayout": "Rename Layout",
+  "PE.Views.DocumentHolder.textLongName": "Enter a name that is less than 128 characters.",
+  "PE.Views.DocumentHolder.textRenameError": "Layout name must not be empty.",
   "PE.Views.DocumentHolder.textLayoutName": "Layout name",
   "PE.Views.DocumentHolder.textEditObject": "Edit object",
   "PE.Views.DocumentHolder.textEditPoints": "Edit points",

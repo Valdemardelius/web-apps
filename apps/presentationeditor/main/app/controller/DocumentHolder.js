@@ -2829,43 +2829,36 @@ define([
         },
 
         onRenameLayout: function() {
-            var me = this; 
-
-            var selectedElements = me.api.getSelectedElements(),
-            layout           = undefined;
+            var me = this;
+            var selectedElements = me.api.getSelectedElements();
+            var layout = undefined;
             if (selectedElements && _.isArray(selectedElements)){
                 _.each(selectedElements, function(element) {
                     if (Asc.c_oAscTypeSelectElement.Slide == element.get_ObjectType()) {
-                        var elValue         = element.get_ObjectValue();
-                        layout              = elValue.get_LayoutName();
+                        var elValue = element.get_ObjectValue();
+                        layout = elValue.get_LayoutName();
                         return false;
                     }
                 });
             }
-            
-            var rec = layout;        
-
-                if(rec){                    
-                (new Common.Views.TextInputDialog({
-                    title: me.documentHolder.textRenameLayout,
-                    label: me.documentHolder.textLayoutName,
-                    value: rec,
-                    inputConfig: {
-                        allowBlank  : false,
-                        blankError  : me.documentHolder.textRenameError,
-                        validation: function(value) {
-                            return value.length<128 ? true : me.documentHolder.textLongName;
-                        }
-                    },
-                        handler: function(result, value) {
-                            if (result == 'ok') {
-                                me.api.asc_SetLayoutName(value);
-                            }
-                        }
-                    
-                    
-                })).show();
-                }
+                             
+            (new Common.Views.TextInputDialog({
+                title: me.documentHolder.textRenameLayout,
+                label: me.documentHolder.textLayoutName,
+                value: layout,
+                inputConfig: {
+                    allowBlank  : false,
+                    blankError  : me.documentHolder.textRenameError,
+                    validation: function(value) {
+                        return value.length < 128 ? true : me.documentHolder.textLongName;
+                    }
+                },
+                handler: function(result, value) {
+                    if (result == 'ok') {
+                        me.api.asc_SetLayoutName(value);
+                    }
+                }                                  
+            })).show();
         },
     });
 });
